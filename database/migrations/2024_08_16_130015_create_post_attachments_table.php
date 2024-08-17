@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('post_attachments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+            $table->string('file_name', 255);
+            $table->string('file_path', 255);
+            $table->string('file_type', 50);
             $table->timestamps();
         });
     }

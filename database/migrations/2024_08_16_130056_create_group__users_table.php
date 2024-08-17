@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('group__users', function (Blueprint $table) {
             $table->id();
+            $table->string('role', 25)->default('member');
+            $table->string('status', 25)->default('pending');
+            $table->string('token', 1024)->nullable();
+            $table->timestamp('token_expires_at')->nullable();
+            $table->timestamp('joined_at')->nullable();
+            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
